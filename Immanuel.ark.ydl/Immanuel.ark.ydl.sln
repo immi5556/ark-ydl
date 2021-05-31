@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Immanuel.ark.ydl", "Immanuel.ark.ydl\Immanuel.ark.ydl.csproj", "{C0C7940D-C057-4484-8A41-5DAD11E57357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immanuel.ark.ydl", "Immanuel.ark.ydl\Immanuel.ark.ydl.csproj", "{C0C7940D-C057-4484-8A41-5DAD11E57357}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF6DA08B-FB70-4FBA-9D5A-EA3693721237}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

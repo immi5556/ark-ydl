@@ -21,6 +21,7 @@ namespace Immanuel.ark.ydl
         }
         public static Func<string> CurrentTimeStamp = () => $"{DateTime.Now.Year}{DateTime.Now.Month.ToString().PadLeft(2, '0')}{DateTime.Now.Day.ToString().PadLeft(2, '0')}_{DateTime.Now.Hour.ToString().PadLeft(2, '0')}{DateTime.Now.Minute.ToString().PadLeft(2, '0')}{DateTime.Now.Second.ToString().PadLeft(2, '0')}_{DateTime.Now.Millisecond.ToString().PadLeft(4, '0')}";
         [HttpPost]
+        [Route("dld/vid")]
         public async Task<FileStreamResult> DownloadVideo()
         {
             string videoIdOrUrl = Request.Form["yurl"];
@@ -29,33 +30,15 @@ namespace Immanuel.ark.ydl
             var streamManifest = await youtube.Videos.Streams.GetManifestAsync(videoIdOrUrl);
             var streamInfo = streamManifest.GetMuxedStreams().TryGetWithHighestVideoQuality();
             if (streamInfo is null) throw new ApplicationException("This video has no muxed streams.");
-            var fileName =   $"{CurrentTimeStamp()}.{streamInfo.Container.Name}";
-            using (var progress = new InlineProgress()) // display progress in console
-                await youtube.Videos.Streams.DownloadAsync(streamInfo, fileName, progress);
+
+            var video = await youtube.Videos.GetAsync(videoIdOrUrl);
+            var title = video.Title; // "Collections - Blender 2.80 Fundamentals"
+            var author = video.Author.Title; // "Blender"
+            var duration = video.Duration;
+
+            var fileName = System.IO.Path.Combine(_env.WebRootPath, $"{CurrentTimeStamp()}.{streamInfo.Container.Name}");
+            await youtube.Videos.Streams.DownloadAsync(streamInfo, fileName, null);
             return File(System.IO.File.OpenRead(fileName), "application/octet-stream");
-        }
-    }
-    internal class InlineProgress : IProgress<double>, IDisposable
-    {
-        private readonly int _posX;
-        private readonly int _posY;
-
-        public InlineProgress()
-        {
-            _posX = Console.CursorLeft;
-            _posY = Console.CursorTop;
-        }
-
-        public void Report(double progress)
-        {
-            Console.SetCursorPosition(_posX, _posY);
-            Console.WriteLine($"{progress:P1}");
-        }
-
-        public void Dispose()
-        {
-            Console.SetCursorPosition(_posX, _posY);
-            Console.WriteLine("Completed ✓");
         }
     }
 }

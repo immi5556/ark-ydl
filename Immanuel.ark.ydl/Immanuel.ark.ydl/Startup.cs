@@ -28,7 +28,7 @@ namespace Immanuel.ark.ydl
               action.AddPolicy("corspolicy", builder =>
                     builder
                  .AllowAnyMethod()
-                 .AllowCredentials()
+                 //.AllowCredentials()
                  //.WithOrigins("http://localhost:3000", "https://localhost:3000")
                  .AllowAnyOrigin()
                  .AllowAnyHeader()));
