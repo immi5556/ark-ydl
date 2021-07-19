@@ -107,14 +107,14 @@
                     // Make Ajax request with the contentType = false, and procesDate = false
                     var ajaxRequest = $.ajax({
                         type: "POST",
-                        url: "/api/yl/DlAud",
+                        url: "/api/yt/dld/aud",
                         contentType: false,
                         processData: false,
                         data: data
                     });
 
                     ajaxRequest.done(function (data, xhr, textStatus) {
-                        var dl = "<a class='buttonDownload' href='" + decodeURIComponent(data.Path).replace(/\+/g, ' ') + "' download='" + data.FileName + "' style='margin-top:10px;'>Download - " + data.FileName + "</a> <a style='cursor:pointer;' class='fbsharelink'><img src='/Content/share_1.png' width='30' height='30' /></a> <br /><span>(Available for 3 Hrs)</span><br />";
+                        var dl = "<a class='buttonDownload' href='" + decodeURIComponent(data.path).replace(/\+/g, ' ') + "' download='" + data.fileName + "' style='margin-top:10px;'>Download - " + data.fileName + "</a> <a style='cursor:pointer;' class='fbsharelink'><img src='/Content/share_1.png' width='30' height='30' /></a> <br /><span>(Available for 3 Hrs)</span><br />";
                         $("#vid-list").append($(dl));
                         //$("#gnt").text(data.TotCnt);
                     });
@@ -137,7 +137,7 @@
                     data.append('overwrite', false);
 
                     $(".uplvid-prog").css("display", "table-cell");
-                    // Make Ajax request with the contentType = false, and procesDate = false
+
                     var ajaxRequest = $.ajax({
                         type: "POST",
                         url: "/api/yt/dld/vid",
@@ -147,7 +147,7 @@
                     });
 
                     ajaxRequest.done(function (data, xhr, textStatus) {
-                        var dl = "<a class='buttonDownload' href='" + decodeURIComponent(data.Path).replace(/\+/g, ' ') + "' download='" + data.FileName + "' style='margin-top:10px;'>Download - " + data.FileName + "</a> <a style='cursor:pointer;' class='fbsharelink'><img src='/Content/share_1.png' width='30' height='30' /></a> <br /><span>(Available for 3 Hrs)</span><br />";
+                        var dl = "<a class='buttonDownload' href='" + decodeURIComponent(data.path).replace(/\+/g, ' ') + "' download='" + data.fileName + "' style='margin-top:10px;'>Download - " + data.fileName + "</a> <a style='cursor:pointer;' class='fbsharelink'><img src='/Content/share_1.png' width='30' height='30' /></a> <br /><span>(Available for 3 Hrs)</span><br />";
                         $("#vid-list").append($(dl));
                         //$("#gnt").text(data.TotCnt);
                     });
